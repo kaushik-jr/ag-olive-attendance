@@ -1468,4 +1468,49 @@ td {
         white-space: nowrap;
     }
 }
-```
+```css
+/* =========================================================
+   MEMBERS PAGE - CLEAN NO-LINE DESIGN
+   ========================================================= */
+
+/* Remove borders from member page cards */
+#memberForm,
+.search-card {
+    border: none;
+}
+
+/* Remove borders from member list area */
+.members-section {
+    border: none;
+}
+
+/* Member cards - no visible lines */
+.member-card {
+    border: none !important;
+
+    box-shadow:
+        0 5px 18px rgba(15, 52, 100, 0.07);
+}
+
+/* Keep member statistics clean */
+.members-section .card {
+    border: none;
+}
+
+/* Clean form */
+#memberForm {
+    border: none;
+
+    box-shadow:
+        0 6px 20px rgba(15, 52, 100, 0.06);
+}
+
+/* Clean search box */
+.search-card {
+    border: none;
+
+    box-shadow:
+        0 6px 20px rgba(15, 52, 100, 0.06);
+}
+
+

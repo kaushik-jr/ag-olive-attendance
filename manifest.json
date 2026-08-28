@@ -1,0 +1,22 @@
+{
+  "name": "AG Olive Prayer Centre Attendance",
+  "short_name": "AG Olive",
+  "description": "AG Olive Prayer Centre Attendance Management System",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8fbff",
+  "theme_color": "#123e91",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,21 +11,44 @@
     <title>AG Olive Prayer Centre - Attendance System</title>
 
 
-    <!-- PWA -->
+    <!-- =========================
+         PWA
+    ========================== -->
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
     <meta name="theme-color" content="#123e91">
 
+    <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- CSS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="style.css">
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="AG Olive"
+    >
+
+
+    <!-- =========================
+         CSS
+    ========================== -->
+
+    <link rel="stylesheet" href="/style.css">
 
 </head>
 
 
 <body>
+
+
+    <!-- =========================
+         LOGIN PAGE
+    ========================== -->
 
     <div class="login-container">
 
@@ -43,7 +67,12 @@
             </p>
 
 
+            <!-- LOGIN FORM -->
+
             <form id="loginForm">
+
+
+                <!-- EMAIL -->
 
                 <label for="email">
                     Email
@@ -53,9 +82,12 @@
                     type="email"
                     id="email"
                     placeholder="Enter your email"
+                    autocomplete="email"
                     required
                 >
 
+
+                <!-- PASSWORD -->
 
                 <label for="password">
                     Password
@@ -65,14 +97,19 @@
                     type="password"
                     id="password"
                     placeholder="Enter your password"
+                    autocomplete="current-password"
                     required
                 >
 
+
+                <!-- LOGIN BUTTON -->
 
                 <button type="submit">
                     LOGIN
                 </button>
 
+
+                <!-- LOGIN MESSAGE -->
 
                 <p id="message"></p>
 
@@ -83,36 +120,43 @@
     </div>
 
 
-    <!-- SUPABASE -->
+    <!-- =========================
+         SUPABASE
+    ========================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-    <!-- LOGIN JAVASCRIPT -->
+    <!-- =========================
+         LOGIN JAVASCRIPT
+    ========================== -->
 
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
 
 
-    <!-- SERVICE WORKER -->
+    <!-- =========================
+         SERVICE WORKER
+    ========================== -->
 
     <script>
 
         if ("serviceWorker" in navigator) {
 
-            window.addEventListener("load", () => {
+            window.addEventListener("load", function () {
 
                 navigator.serviceWorker
-                    .register("service-worker.js")
+                    .register("/service-worker.js")
 
-                    .then(() => {
+                    .then(function (registration) {
 
                         console.log(
-                            "Service Worker registered successfully"
+                            "Service Worker registered successfully:",
+                            registration.scope
                         );
 
                     })
 
-                    .catch(error => {
+                    .catch(function (error) {
 
                         console.error(
                             "Service Worker registration failed:",
@@ -131,3 +175,4 @@
 </body>
 
 </html>
+```

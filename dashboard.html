@@ -10,21 +10,20 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        AG Olive Prayer Centre - Dashboard
-    </title>
+    <title>AG Olive Prayer Centre - Dashboard</title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
 
-    <!-- SUPABASE -->
+    <!-- LUCIDE ICONS -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- CHART.JS -->
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -32,14 +31,20 @@
 
 <body>
 
-    <div class="dashboard">
+<div class="dashboard">
 
 
-        <!-- =========================
-             HEADER
-        ========================== -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-        <header class="dashboard-header">
+    <header class="dashboard-header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i data-lucide="church"></i>
+            </div>
 
             <div>
 
@@ -48,41 +53,77 @@
                 </h1>
 
                 <p>
-                    Attendance System
+                    Attendance Management System
                 </p>
 
             </div>
 
+        </div>
 
-            <button id="logoutBtn">
-                LOGOUT
-            </button>
 
-        </header>
+        <button id="logoutBtn" class="logout-btn">
+
+            <i data-lucide="log-out"></i>
+
+            <span>Logout</span>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-content">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome-section">
+
+            <div>
+
+                <span class="welcome-label">
+                    ADMINISTRATION PORTAL
+                </span>
+
+                <h2>
+                    Dashboard
+                </h2>
+
+                <p>
+                    Manage members and track Sunday attendance easily.
+                </p>
+
+            </div>
+
+            <div class="welcome-icon">
+
+                <i data-lucide="layout-dashboard"></i>
+
+            </div>
+
+        </div>
 
 
 
         <!-- =========================
-             MAIN CONTENT
+             STATISTICS
         ========================== -->
 
-        <main class="dashboard-content">
+        <div class="cards">
 
 
-            <h2>
-                Dashboard
-            </h2>
+            <div class="card stat-card">
 
+                <div class="stat-icon blue">
+                    <i data-lucide="users"></i>
+                </div>
 
-
-            <!-- =========================
-                 MAIN CARDS
-            ========================== -->
-
-            <div class="cards">
-
-
-                <div class="card">
+                <div class="stat-content">
 
                     <h3>
                         Total Members
@@ -94,9 +135,17 @@
 
                 </div>
 
+            </div>
 
 
-                <div class="card">
+
+            <div class="card stat-card">
+
+                <div class="stat-icon green">
+                    <i data-lucide="user-check"></i>
+                </div>
+
+                <div class="stat-content">
 
                     <h3>
                         Today's Attendance
@@ -108,9 +157,17 @@
 
                 </div>
 
+            </div>
 
 
-                <div class="card">
+
+            <div class="card stat-card">
+
+                <div class="stat-icon purple">
+                    <i data-lucide="calendar-check"></i>
+                </div>
+
+                <div class="stat-content">
 
                     <h3>
                         This Week
@@ -122,19 +179,17 @@
 
                 </div>
 
-
             </div>
 
 
 
-            <!-- =========================
-                 STATISTICS
-            ========================== -->
+            <div class="card stat-card">
 
-            <div class="cards">
+                <div class="stat-icon orange">
+                    <i data-lucide="percent"></i>
+                </div>
 
-
-                <div class="card">
+                <div class="stat-content">
 
                     <h3>
                         Today's %
@@ -146,9 +201,17 @@
 
                 </div>
 
+            </div>
 
 
-                <div class="card">
+
+            <div class="card stat-card">
+
+                <div class="stat-icon teal">
+                    <i data-lucide="bar-chart-3"></i>
+                </div>
+
+                <div class="stat-content">
 
                     <h3>
                         Weekly %
@@ -160,9 +223,17 @@
 
                 </div>
 
+            </div>
 
 
-                <div class="card">
+
+            <div class="card stat-card">
+
+                <div class="stat-icon navy">
+                    <i data-lucide="database"></i>
+                </div>
+
+                <div class="stat-content">
 
                     <h3>
                         Total Records
@@ -174,20 +245,44 @@
 
                 </div>
 
-
             </div>
 
 
+        </div>
 
-            <!-- =========================
-                 ATTENDANCE CHART
-            ========================== -->
+
+
+        <!-- =========================
+             CHART + TOP MEMBERS
+        ========================== -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- ATTENDANCE CHART -->
 
             <div class="card chart-card">
 
-                <h3>
-                    📈 Attendance Trend
-                </h3>
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="small-label">
+                            STATISTICS
+                        </span>
+
+                        <h3>
+                            Attendance Trend
+                        </h3>
+
+                    </div>
+
+                    <div class="heading-icon">
+                        <i data-lucide="trending-up"></i>
+                    </div>
+
+                </div>
+
 
                 <div class="chart-container">
 
@@ -201,15 +296,30 @@
 
 
 
-            <!-- =========================
-                 TOP MEMBERS
-            ========================== -->
+            <!-- TOP MEMBERS -->
 
-            <div class="card">
+            <div class="card top-members-card">
 
-                <h3>
-                    🏆 Top Attendance
-                </h3>
+                <div class="card-heading">
+
+                    <div>
+
+                        <span class="small-label">
+                            PERFORMANCE
+                        </span>
+
+                        <h3>
+                            Top Attendance
+                        </h3>
+
+                    </div>
+
+                    <div class="heading-icon">
+                        <i data-lucide="trophy"></i>
+                    </div>
+
+                </div>
+
 
                 <div id="topMembers">
 
@@ -220,47 +330,156 @@
             </div>
 
 
-
-            <!-- =========================
-                 MENU
-            ========================== -->
-
-            <div class="menu">
-
-
-                <button id="membersBtn">
-                    👥 Members
-                </button>
-
-
-                <button id="attendanceBtn">
-                    ✅ Mark Attendance
-                </button>
-
-
-                <button id="weeklyBtn">
-                    📅 Weekly Attendance
-                </button>
-
-
-                <button id="reportsBtn">
-                    📊 Reports
-                </button>
-
-
-            </div>
-
-
-        </main>
-
-
-    </div>
+        </div>
 
 
 
-    <!-- DASHBOARD JAVASCRIPT -->
+        <!-- =========================
+             QUICK ACTIONS
+        ========================== -->
 
-    <script src="dashboard.js"></script>
+        <div class="section-title">
+
+            <span class="small-label">
+                QUICK ACCESS
+            </span>
+
+            <h2>
+                Manage Attendance
+            </h2>
+
+        </div>
+
+
+        <div class="menu">
+
+
+            <button id="membersBtn" class="menu-card">
+
+                <div class="menu-icon blue">
+                    <i data-lucide="users"></i>
+                </div>
+
+                <div class="menu-text">
+
+                    <strong>
+                        Members
+                    </strong>
+
+                    <span>
+                        Manage church members
+                    </span>
+
+                </div>
+
+                <i
+                    data-lucide="arrow-right"
+                    class="menu-arrow"
+                ></i>
+
+            </button>
+
+
+
+            <button id="attendanceBtn" class="menu-card">
+
+                <div class="menu-icon green">
+                    <i data-lucide="clipboard-check"></i>
+                </div>
+
+                <div class="menu-text">
+
+                    <strong>
+                        Mark Attendance
+                    </strong>
+
+                    <span>
+                        Record Sunday attendance
+                    </span>
+
+                </div>
+
+                <i
+                    data-lucide="arrow-right"
+                    class="menu-arrow"
+                ></i>
+
+            </button>
+
+
+
+            <button id="weeklyBtn" class="menu-card">
+
+                <div class="menu-icon purple">
+                    <i data-lucide="calendar-days"></i>
+                </div>
+
+                <div class="menu-text">
+
+                    <strong>
+                        Weekly Attendance
+                    </strong>
+
+                    <span>
+                        View weekly records
+                    </span>
+
+                </div>
+
+                <i
+                    data-lucide="arrow-right"
+                    class="menu-arrow"
+                ></i>
+
+            </button>
+
+
+
+            <button id="reportsBtn" class="menu-card">
+
+                <div class="menu-icon orange">
+                    <i data-lucide="file-bar-chart"></i>
+                </div>
+
+                <div class="menu-text">
+
+                    <strong>
+                        Reports
+                    </strong>
+
+                    <span>
+                        View attendance reports
+                    </span>
+
+                </div>
+
+                <i
+                    data-lucide="arrow-right"
+                    class="menu-arrow"
+                ></i>
+
+            </button>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<!-- INITIALIZE ICONS -->
+
+<script>
+    lucide.createIcons();
+</script>
+
+
+<!-- DASHBOARD JAVASCRIPT -->
+
+<script src="dashboard.js"></script>
 
 
 </body>

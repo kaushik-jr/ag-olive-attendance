@@ -1542,3 +1542,699 @@ tr:hover td {
     }
 
 }
+/* =========================================
+SUNDAY ATTENDANCE PAGE
+PROFESSIONAL BLUE + WHITE DESIGN
+========================================= */
+
+.page-heading {
+margin-bottom: 25px;
+}
+
+.page-heading h2 {
+margin-bottom: 8px;
+}
+
+.page-heading p {
+margin: 0;
+color: #64748b;
+font-size: 15px;
+font-weight: 600;
+}
+
+/* =========================================
+DATE SECTION
+========================================= */
+
+.date-section {
+background: linear-gradient(
+135deg,
+#ffffff,
+#eff6ff
+);
+
+```
+border: 1px solid #dbeafe;
+border-left: 5px solid #2563eb;
+
+padding: 24px;
+
+border-radius: 14px;
+
+box-shadow:
+    0 8px 25px rgba(37, 99, 235, 0.10);
+
+margin-bottom: 20px;
+```
+
+}
+
+.date-section label {
+color: #1e3a8a;
+font-size: 15px;
+font-weight: 800;
+}
+
+.date-section input {
+display: block;
+
+```
+margin-top: 10px;
+
+max-width: 280px;
+
+background: #ffffff;
+
+color: #111827;
+
+border: 2px solid #bfdbfe;
+
+border-radius: 9px;
+
+padding: 12px 14px;
+
+font-weight: 700;
+```
+
+}
+
+.date-section input:focus {
+border-color: #2563eb;
+
+```
+box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+```
+
+}
+
+#selectedDay {
+margin: 12px 0 0;
+
+```
+font-size: 14px;
+
+font-weight: 800;
+```
+
+}
+
+/* =========================================
+SEARCH
+========================================= */
+
+.search-section {
+background: #ffffff;
+
+```
+padding: 20px;
+
+border-radius: 14px;
+
+border: 1px solid #e2e8f0;
+
+box-shadow:
+    0 6px 20px rgba(15, 23, 42, 0.06);
+
+margin-bottom: 22px;
+```
+
+}
+
+.search-section label {
+margin-top: 0;
+
+```
+color: #1e293b;
+
+font-weight: 800;
+```
+
+}
+
+.search-section input {
+margin-top: 8px;
+
+```
+background: #f8fafc;
+
+color: #111827;
+
+border: 1px solid #cbd5e1;
+
+border-radius: 9px;
+
+padding: 13px 15px;
+
+font-weight: 600;
+```
+
+}
+
+.search-section input:focus {
+background: #ffffff;
+
+```
+border-color: #2563eb;
+
+box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.10);
+```
+
+}
+
+/* =========================================
+ATTENDANCE SUMMARY
+========================================= */
+
+.attendance-summary {
+display: grid;
+
+```
+grid-template-columns:
+    repeat(3, 1fr);
+
+gap: 18px;
+
+margin: 22px 0;
+```
+
+}
+
+.attendance-stat {
+display: flex;
+
+```
+align-items: center;
+
+gap: 15px;
+
+background: #ffffff;
+
+border: 1px solid #e2e8f0;
+
+border-radius: 14px;
+
+padding: 18px 20px;
+
+box-shadow:
+    0 6px 20px rgba(15, 23, 42, 0.06);
+```
+
+}
+
+.stat-icon {
+width: 48px;
+
+```
+height: 48px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+border-radius: 12px;
+
+font-size: 23px;
+
+background: #eff6ff;
+```
+
+}
+
+.stat-label {
+display: block;
+
+```
+color: #64748b;
+
+font-size: 12px;
+
+font-weight: 800;
+
+text-transform: uppercase;
+
+letter-spacing: 0.5px;
+```
+
+}
+
+.attendance-stat strong {
+display: block;
+
+```
+margin-top: 3px;
+
+color: #0f172a;
+
+font-size: 26px;
+
+font-weight: 900;
+```
+
+}
+
+/* =========================================
+ATTENDANCE REGISTER
+========================================= */
+
+.attendance-register {
+background: #ffffff;
+
+```
+border: 1px solid #e2e8f0;
+
+border-radius: 16px;
+
+overflow: hidden;
+
+box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.07);
+
+margin-top: 25px;
+```
+
+}
+
+.register-header {
+padding: 20px 22px;
+
+```
+background:
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        #ffffff
+    );
+
+border-bottom: 1px solid #dbeafe;
+```
+
+}
+
+.register-header h3 {
+margin: 0;
+
+```
+color: #0f172a;
+
+font-size: 19px;
+
+font-weight: 900;
+```
+
+}
+
+.register-header span {
+display: block;
+
+```
+margin-top: 5px;
+
+color: #64748b;
+
+font-size: 13px;
+
+font-weight: 600;
+```
+
+}
+
+/* =========================================
+MEMBER ROW
+========================================= */
+
+.attendance-register #attendanceList {
+padding: 12px;
+}
+
+.attendance-row {
+background: #ffffff;
+
+```
+color: #0f172a;
+
+padding: 15px 18px;
+
+margin-bottom: 8px;
+
+border: 1px solid #e2e8f0;
+
+border-left: 4px solid #2563eb;
+
+border-radius: 10px;
+
+box-shadow: none;
+
+transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+```
+
+}
+
+.attendance-row:hover {
+background: #f8fbff;
+
+```
+border-color: #bfdbfe;
+
+transform: translateX(3px);
+```
+
+}
+
+.attendance-row label {
+display: flex;
+
+```
+align-items: center;
+
+gap: 12px;
+
+margin: 0;
+
+cursor: pointer;
+
+color: #0f172a;
+```
+
+}
+
+.attendance-row strong {
+font-size: 15px;
+
+```
+font-weight: 800;
+```
+
+}
+
+.member-phone {
+color: #64748b;
+
+```
+font-size: 13px;
+
+font-weight: 600;
+```
+
+}
+
+/* =========================================
+CHECKBOX
+========================================= */
+
+.attendance-row input[type="checkbox"] {
+width: 21px;
+
+```
+height: 21px;
+
+margin: 0;
+
+accent-color: #2563eb;
+
+cursor: pointer;
+
+transform: none;
+```
+
+}
+
+/* =========================================
+SAVE BUTTON
+========================================= */
+
+.save-attendance-btn {
+width: 100%;
+
+```
+margin-top: 22px;
+
+padding: 16px;
+
+background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+color: #ffffff;
+
+border: none;
+
+border-radius: 11px;
+
+font-size: 15px;
+
+font-weight: 900;
+
+letter-spacing: 0.4px;
+
+box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.22);
+
+transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+```
+
+}
+
+.save-attendance-btn:hover {
+background:
+linear-gradient(
+135deg,
+#1d4ed8,
+#1e40af
+);
+
+```
+transform: translateY(-2px);
+
+box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.30);
+```
+
+}
+
+.save-attendance-btn:disabled {
+opacity: 0.65;
+
+```
+cursor: not-allowed;
+
+transform: none;
+```
+
+}
+
+/* =========================================
+MESSAGE
+========================================= */
+
+#message {
+text-align: center;
+
+```
+margin: 15px 0;
+
+font-weight: 800;
+```
+
+}
+
+/* =========================================
+EMPTY STATE
+========================================= */
+
+.empty-state {
+text-align: center;
+
+```
+padding: 40px 20px;
+
+color: #64748b;
+```
+
+}
+
+.empty-state div {
+font-size: 40px;
+
+```
+margin-bottom: 8px;
+```
+
+}
+
+.empty-state p {
+margin: 0;
+
+```
+font-weight: 700;
+```
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+```
+.attendance-summary {
+    grid-template-columns: 1fr;
+}
+
+.attendance-stat {
+    padding: 16px;
+}
+
+.date-section,
+.search-section {
+    padding: 18px;
+}
+```
+
+}
+
+@media (max-width: 500px) {
+
+```
+.attendance-row {
+    padding: 14px;
+}
+
+.attendance-row label {
+    gap: 9px;
+}
+
+.attendance-row strong {
+    font-size: 14px;
+}
+
+.member-phone {
+    font-size: 12px;
+}
+```
+
+}
+/* =========================================
+   📱 ATTENDANCE MOBILE APP DESIGN
+========================================= */
+
+@media (max-width: 600px) {
+
+    /* Header */
+    .dashboard-header {
+        padding: 18px 16px;
+        gap: 12px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 20px;
+        line-height: 1.3;
+    }
+
+    .dashboard-header p {
+        font-size: 13px;
+    }
+
+    .dashboard-header button {
+        width: 100%;
+        padding: 12px;
+        font-size: 13px;
+    }
+
+
+    /* Main content */
+    .dashboard-content {
+        padding: 20px 14px;
+    }
+
+    .dashboard-content h2 {
+        font-size: 23px;
+        margin-bottom: 20px;
+    }
+
+
+    /* Date section */
+    .date-section {
+        padding: 18px;
+        margin-bottom: 15px;
+    }
+
+    .date-section input {
+        width: 100%;
+        max-width: none;
+        margin-top: 8px;
+    }
+
+
+    /* Search */
+    .search-section {
+        margin: 15px 0;
+    }
+
+    #searchAttendance {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+    }
+
+
+    /* Attendance rows */
+    .attendance-row {
+        padding: 16px 14px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    .attendance-row label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0;
+        font-size: 15px;
+    }
+
+    .attendance-row input[type="checkbox"] {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+        transform: none;
+    }
+
+
+    /* Member phone */
+    .member-phone {
+        font-size: 12px;
+        color: #64748b;
+    }
+
+
+    /* Save button */
+    #saveAttendanceBtn {
+        width: 100%;
+        padding: 15px;
+        margin-top: 18px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+
+    /* Message */
+    #message {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 15px;
+    }
+
+}

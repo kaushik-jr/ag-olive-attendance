@@ -1,70 +1,175 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AG Olive Prayer Centre - Attendance</title>
+<title>AG Olive Prayer Centre - Sunday Attendance</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+```
 
 </head>
 
 <body>
 
-    <div class="dashboard">
+```
+<div class="dashboard">
 
-        <header class="dashboard-header">
 
-            <div>
-                <h1>AG Olive Prayer Centre</h1>
-                <p>Attendance System</p>
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="dashboard-header">
+
+        <div>
+
+            <h1>
+                AG Olive Prayer Centre
+            </h1>
+
+            <p>
+                Attendance System
+            </p>
+
+        </div>
+
+
+        <button id="backBtn">
+            🏠 DASHBOARD
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-content">
+
+
+        <h2>
+            📅 Sunday Attendance
+        </h2>
+
+        <p>
+            Mark attendance for the Sunday service
+        </p>
+
+
+
+        <!-- =========================
+             DATE
+        ========================== -->
+
+        <div class="date-section">
+
+            <label for="attendanceDate">
+                📅 Select Sunday
+            </label>
+
+            <input
+                type="date"
+                id="attendanceDate"
+            >
+
+            <p id="selectedDay">
+                Please select a Sunday
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================
+             SEARCH
+        ========================== -->
+
+        <div class="search-section">
+
+            <input
+                type="text"
+                id="searchAttendance"
+                placeholder="🔎 Search member by name or phone..."
+            >
+
+        </div>
+
+
+
+        <!-- =========================
+             ATTENDANCE SUMMARY
+        ========================== -->
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    ✅ Present
+                </h3>
+
+                <p id="presentCount">
+                    0
+                </p>
+
             </div>
 
-            <button id="backBtn">
-                DASHBOARD
-            </button>
-
-        </header>
 
 
-        <main class="dashboard-content">
+            <div class="card">
 
-            <h2>Mark Attendance</h2>
+                <h3>
+                    ❌ Absent
+                </h3>
 
-
-            <!-- DATE -->
-
-            <div class="date-section">
-
-                <label for="attendanceDate">
-                    Attendance Date
-                </label>
-
-                <input
-                    type="date"
-                    id="attendanceDate"
-                >
+                <p id="absentCount">
+                    0
+                </p>
 
             </div>
 
 
-            <!-- SEARCH -->
 
-            <div class="search-section">
+            <div class="card">
 
-                <input
-                    type="text"
-                    id="searchAttendance"
-                    placeholder="🔎 Search member by name or phone..."
-                >
+                <h3>
+                    👥 Total Members
+                </h3>
+
+                <p id="totalCount">
+                    0
+                </p>
 
             </div>
 
 
-            <!-- ATTENDANCE LIST -->
+        </div>
+
+
+
+        <!-- =========================
+             MEMBERS
+        ========================== -->
+
+        <div class="card">
+
+            <h3>
+                👥 Members
+            </h3>
+
+            <p>
+                Mark each member as Present or Absent
+            </p>
+
 
             <div id="attendanceList">
 
@@ -72,34 +177,50 @@
 
             </div>
 
-
-            <!-- SAVE -->
-
-            <button id="saveAttendanceBtn">
-
-                💾 SAVE ATTENDANCE
-
-            </button>
+        </div>
 
 
-            <!-- MESSAGE -->
 
-            <p id="message"></p>
+        <!-- =========================
+             SAVE
+        ========================== -->
 
+        <button id="saveAttendanceBtn">
 
-        </main>
+            💾 SAVE SUNDAY ATTENDANCE
 
-    </div>
-
-
-    <!-- SUPABASE -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        </button>
 
 
-    <!-- ATTENDANCE JAVASCRIPT -->
 
-    <script src="attendance.js"></script>
+        <!-- =========================
+             MESSAGE
+        ========================== -->
+
+        <p id="message"></p>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================
+     SUPABASE
+========================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+<!-- =========================
+     ATTENDANCE JAVASCRIPT
+========================== -->
+
+<script src="attendance.js"></script>
+```
 
 </body>
 

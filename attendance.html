@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AG Olive Prayer Centre - Attendance</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>AG Olive Prayer Centre</h1>
+                <p>Attendance System</p>
+            </div>
+
+            <button id="backBtn">
+                DASHBOARD
+            </button>
+
+        </header>
+
+
+        <main class="dashboard-content">
+
+            <h2>Mark Attendance</h2>
+
+
+            <!-- DATE -->
+
+            <div class="date-section">
+
+                <label for="attendanceDate">
+                    Attendance Date
+                </label>
+
+                <input
+                    type="date"
+                    id="attendanceDate"
+                >
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-section">
+
+                <input
+                    type="text"
+                    id="searchAttendance"
+                    placeholder="🔎 Search member by name or phone..."
+                >
+
+            </div>
+
+
+            <!-- ATTENDANCE LIST -->
+
+            <div id="attendanceList">
+
+                Loading members...
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <button id="saveAttendanceBtn">
+
+                💾 SAVE ATTENDANCE
+
+            </button>
+
+
+            <!-- MESSAGE -->
+
+            <p id="message"></p>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- ATTENDANCE JAVASCRIPT -->
+
+    <script src="attendance.js"></script>
+
+</body>
+
+</html>

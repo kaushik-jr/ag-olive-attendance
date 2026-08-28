@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AG Olive Prayer Centre - Members</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="dashboard">
+
+
+        <!-- ===============================
+             HEADER
+        ================================ -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    AG Olive Prayer Centre
+                </h1>
+
+                <p>
+                    Attendance System
+                </p>
+
+            </div>
+
+
+            <button id="backBtn">
+                DASHBOARD
+            </button>
+
+        </header>
+
+
+
+        <!-- ===============================
+             MAIN CONTENT
+        ================================ -->
+
+        <main class="dashboard-content">
+
+
+            <h2>
+                Members
+            </h2>
+
+
+
+            <!-- ===============================
+                 ADD MEMBER BUTTON
+            ================================ -->
+
+            <button id="addMemberBtn">
+                ➕ Add Member
+            </button>
+
+
+
+            <!-- ===============================
+                 MEMBER FORM
+            ================================ -->
+
+            <div
+                id="memberForm"
+                style="display: none;"
+            >
+
+                <h3 id="formTitle">
+                    Add New Member
+                </h3>
+
+
+                <form id="newMemberForm">
+
+
+                    <!-- NAME -->
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        required
+                    >
+
+
+
+                    <!-- PHONE -->
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                    >
+
+
+
+                    <!-- AGE -->
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                    >
+
+
+
+                    <!-- GENDER -->
+
+                    <label for="gender">
+                        Gender
+                    </label>
+
+                    <select id="gender">
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                    </select>
+
+
+
+                    <!-- JOINED DATE -->
+
+                    <label for="joined_date">
+                        Joined Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="joined_date"
+                    >
+
+
+
+                    <!-- SAVE -->
+
+                    <button
+                        type="submit"
+                        id="saveBtn"
+                    >
+                        SAVE MEMBER
+                    </button>
+
+
+
+                    <!-- CANCEL -->
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                    >
+                        CANCEL
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+
+            <hr>
+
+
+
+            <!-- ===============================
+                 MEMBER LIST
+            ================================ -->
+
+            <h3>
+                Member List
+            </h3>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="search-section">
+
+                <input
+                    type="text"
+                    id="searchMember"
+                    placeholder="🔎 Search members by name or phone..."
+                >
+
+            </div>
+
+
+
+            <!-- MEMBERS -->
+
+            <div id="membersList">
+
+                Loading members...
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- ===============================
+         SUPABASE
+    ================================ -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+    <!-- ===============================
+         MEMBERS JAVASCRIPT
+    ================================ -->
+
+    <script src="members.js"></script>
+
+
+</body>
+
+</html>

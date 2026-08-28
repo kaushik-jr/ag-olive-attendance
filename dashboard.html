@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        AG Olive Prayer Centre - Dashboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- CHART.JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+    <div class="dashboard">
+
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    AG Olive Prayer Centre
+                </h1>
+
+                <p>
+                    Attendance System
+                </p>
+
+            </div>
+
+
+            <button id="logoutBtn">
+                LOGOUT
+            </button>
+
+        </header>
+
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <main class="dashboard-content">
+
+
+            <h2>
+                Dashboard
+            </h2>
+
+
+
+            <!-- =========================
+                 MAIN CARDS
+            ========================== -->
+
+            <div class="cards">
+
+
+                <div class="card">
+
+                    <h3>
+                        Total Members
+                    </h3>
+
+                    <p id="totalMembers">
+                        0
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h3>
+                        Today's Attendance
+                    </h3>
+
+                    <p id="todayAttendance">
+                        0
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h3>
+                        This Week
+                    </h3>
+
+                    <p id="weekAttendance">
+                        0
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 STATISTICS
+            ========================== -->
+
+            <div class="cards">
+
+
+                <div class="card">
+
+                    <h3>
+                        Today's %
+                    </h3>
+
+                    <p id="todayPercentage">
+                        0%
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h3>
+                        Weekly %
+                    </h3>
+
+                    <p id="weekPercentage">
+                        0%
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <h3>
+                        Total Records
+                    </h3>
+
+                    <p id="totalRecords">
+                        0
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 ATTENDANCE CHART
+            ========================== -->
+
+            <div class="card chart-card">
+
+                <h3>
+                    📈 Attendance Trend
+                </h3>
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="attendanceChart"
+                    ></canvas>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 TOP MEMBERS
+            ========================== -->
+
+            <div class="card">
+
+                <h3>
+                    🏆 Top Attendance
+                </h3>
+
+                <div id="topMembers">
+
+                    Loading...
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 MENU
+            ========================== -->
+
+            <div class="menu">
+
+
+                <button id="membersBtn">
+                    👥 Members
+                </button>
+
+
+                <button id="attendanceBtn">
+                    ✅ Mark Attendance
+                </button>
+
+
+                <button id="weeklyBtn">
+                    📅 Weekly Attendance
+                </button>
+
+
+                <button id="reportsBtn">
+                    📊 Reports
+                </button>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
+
+    <!-- DASHBOARD JAVASCRIPT -->
+
+    <script src="dashboard.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AG Olive Prayer Centre - Reports</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>AG Olive Prayer Centre</h1>
+                <p>Attendance System</p>
+            </div>
+
+            <button id="backBtn">
+                DASHBOARD
+            </button>
+
+        </header>
+
+
+        <main class="dashboard-content">
+
+            <h2>Attendance Reports</h2>
+
+
+            <!-- =========================
+                 SUMMARY CARDS
+            ========================== -->
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>Total Members</h3>
+
+                    <p id="totalMembers">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Total Present</h3>
+
+                    <p id="totalPresent">
+                        0
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>Attendance %</h3>
+
+                    <p id="attendancePercentage">
+                        0%
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 DATE FILTER
+            ========================== -->
+
+            <div class="date-section">
+
+                <label for="startDate">
+                    Start Date
+                </label>
+
+                <input
+                    type="date"
+                    id="startDate"
+                >
+
+
+                <label for="endDate">
+                    End Date
+                </label>
+
+                <input
+                    type="date"
+                    id="endDate"
+                >
+
+
+                <br><br>
+
+
+                <button id="generateBtn">
+                    📊 GENERATE REPORT
+                </button>
+
+
+                <button
+                    id="downloadPdfBtn"
+                    style="display: none;"
+                >
+                    📄 DOWNLOAD PDF
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 REPORT AREA
+            ========================== -->
+
+            <div id="reportArea">
+
+                <div id="reportTable">
+
+                    Select a date range and
+                    generate the report.
+
+                </div>
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- PDF LIBRARY -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+
+    <!-- REPORTS JAVASCRIPT -->
+
+    <script src="reports.js"></script>
+
+</body>
+
+</html>

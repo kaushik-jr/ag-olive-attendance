@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AG Olive Prayer Centre - Weekly Attendance</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>AG Olive Prayer Centre</h1>
+                <p>Attendance System</p>
+            </div>
+
+            <button id="backBtn">
+                DASHBOARD
+            </button>
+
+        </header>
+
+
+        <main class="dashboard-content">
+
+            <h2>Weekly Attendance</h2>
+
+
+            <!-- WEEK SELECTION -->
+
+            <div class="date-section">
+
+                <label for="weekDate">
+                    Select a date
+                </label>
+
+                <input
+                    type="date"
+                    id="weekDate"
+                >
+
+            </div>
+
+
+            <!-- WEEK RANGE -->
+
+            <div id="weekRange">
+
+                Loading week...
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div id="weeklySummary">
+
+                Loading summary...
+
+            </div>
+
+
+            <!-- WEEKLY TABLE -->
+
+            <div id="weeklyTable">
+
+                Loading attendance...
+
+            </div>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- WEEKLY JAVASCRIPT -->
+
+    <script src="weekly.js"></script>
+
+</body>
+
+</html>

@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AG Olive Prayer Centre - Attendance System</title>
 
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#123e91">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
@@ -14,14 +26,25 @@
 
         <div class="login-box">
 
-            <h1>AG Olive Prayer Centre</h1>
-            <h2>Attendance System</h2>
+            <h1>
+                AG Olive Prayer Centre
+            </h1>
 
-            <p class="welcome">Please login to continue</p>
+            <h2>
+                Attendance System
+            </h2>
+
+            <p class="welcome">
+                Please login to continue
+            </p>
+
 
             <form id="loginForm">
 
-                <label for="email">Email</label>
+                <label for="email">
+                    Email
+                </label>
+
                 <input
                     type="email"
                     id="email"
@@ -29,7 +52,11 @@
                     required
                 >
 
-                <label for="password">Password</label>
+
+                <label for="password">
+                    Password
+                </label>
+
                 <input
                     type="password"
                     id="password"
@@ -37,7 +64,11 @@
                     required
                 >
 
-                <button type="submit">LOGIN</button>
+
+                <button type="submit">
+                    LOGIN
+                </button>
+
 
                 <p id="message"></p>
 
@@ -46,8 +77,18 @@
         </div>
 
     </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- LOGIN JAVASCRIPT -->
+
+    <script src="app.js"></script>
+
 
 </body>
+
 </html>

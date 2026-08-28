@@ -35,6 +35,9 @@ async function checkUser() {
 const attendanceDate =
     document.getElementById("attendanceDate");
 
+const selectedDay =
+    document.getElementById("selectedDay");
+
 const attendanceList =
     document.getElementById("attendanceList");
 
@@ -47,6 +50,15 @@ const saveAttendanceBtn =
 const message =
     document.getElementById("message");
 
+const presentCount =
+    document.getElementById("presentCount");
+
+const absentCount =
+    document.getElementById("absentCount");
+
+const totalCount =
+    document.getElementById("totalCount");
+
 
 // ===============================
 // STORE MEMBERS
@@ -58,24 +70,115 @@ let existingAttendance = [];
 
 
 // ===============================
-// SET TODAY'S DATE
+// CHECK SUNDAY
 // ===============================
 
-const today =
-    new Date().toISOString().split("T")[0];
+function isSunday(dateString) {
 
-attendanceDate.value = today;
+    const date =
+        new Date(dateString + "T00:00:00");
+
+    return date.getDay() === 0;
+}
 
 
 // ===============================
-// LOAD ACTIVE MEMBERS
+// SHOW SELECTED DAY
+// ===============================
+
+function updateSelectedDay() {
+
+    const selectedDate =
+        attendanceDate.value;
+
+    if (!selectedDate) {
+
+        selectedDay.textContent =
+            "Please select a Sunday";
+
+        return;
+    }
+
+    if (!isSunday(selectedDate)) {
+
+        selectedDay.textContent =
+            "⚠️ Please select a Sunday only";
+
+        selectedDay.style.color =
+            "#dc2626";
+
+        return;
+    }
+
+    const date =
+        new Date(
+            selectedDate + "T00:00:00"
+        );
+
+    const formattedDate =
+        date.toLocaleDateString(
+            "en-IN",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        );
+
+    selectedDay.textContent =
+        "✅ " + formattedDate;
+
+    selectedDay.style.color =
+        "#2563eb";
+}
+
+
+// ===============================
+// SET CURRENT SUNDAY
+// ===============================
+
+function setSundayDate() {
+
+    const today =
+        new Date();
+
+    const sunday =
+        new Date(today);
+
+    sunday.setDate(
+        today.getDate() -
+        today.getDay()
+    );
+
+    const year =
+        sunday.getFullYear();
+
+    const month =
+        String(
+            sunday.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            sunday.getDate()
+        ).padStart(2, "0");
+
+    attendanceDate.value =
+        `${year}-${month}-${day}`;
+
+    updateSelectedDay();
+}
+
+
+// ===============================
+// LOAD MEMBERS FROM SUPABASE
 // ===============================
 
 async function loadMembers() {
 
     attendanceList.innerHTML =
         "Loading members...";
-
 
     const { data, error } =
         await supabaseClient
@@ -86,21 +189,75 @@ async function loadMembers() {
                 ascending: true
             });
 
-
     if (error) {
 
-        console.error(error);
+        console.error(
+            "Member loading error:",
+            error
+        );
 
         attendanceList.innerHTML =
-            "Error loading members.";
+            "Error loading members: " +
+            error.message;
 
         return;
     }
 
+    allMembers =
+        data || [];
 
-    allMembers = data || [];
+    updateTotalCount();
 
-    displayMembers(allMembers);
+    displayMembers(
+        getFilteredMembers()
+    );
+}
+
+
+// ===============================
+// TOTAL MEMBERS
+// ===============================
+
+function updateTotalCount() {
+
+    totalCount.textContent =
+        allMembers.length;
+}
+
+
+// ===============================
+// ATTENDANCE COUNTS
+// ===============================
+
+function updateAttendanceCounts() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            ".member-checkbox"
+        );
+
+    let present = 0;
+
+    checkboxes.forEach(
+        checkbox => {
+
+            if (checkbox.checked) {
+
+                present++;
+
+            }
+
+        }
+    );
+
+    presentCount.textContent =
+        present;
+
+    absentCount.textContent =
+        allMembers.length - present;
+
+    totalCount.textContent =
+        allMembers.length;
 }
 
 
@@ -112,15 +269,27 @@ function displayMembers(members) {
 
     attendanceList.innerHTML = "";
 
+    if (!members ||
+        members.length === 0) {
 
-    if (!members || members.length === 0) {
+        attendanceList.innerHTML = `
 
-        attendanceList.innerHTML =
-            "No members found.";
+            <div class="empty-state">
+
+                <div>👥</div>
+
+                <p>
+                    No members found.
+                </p>
+
+            </div>
+
+        `;
+
+        updateAttendanceCounts();
 
         return;
     }
-
 
     members.forEach(member => {
 
@@ -131,13 +300,20 @@ function displayMembers(members) {
             "attendance-row";
 
 
-        const isPresent =
-            existingAttendance.some(
+        const existingRecord =
+            existingAttendance.find(
                 record =>
-                    String(record.member_id) ===
-                    String(member.id) &&
-                    record.present === true
+                    String(
+                        record.member_id
+                    ) ===
+                    String(member.id)
             );
+
+
+        const isPresent =
+            existingRecord
+                ? existingRecord.present === true
+                : false;
 
 
         row.innerHTML = `
@@ -157,7 +333,9 @@ function displayMembers(members) {
 
                 ${
                     member.phone
-                        ? `<span> - ${member.phone}</span>`
+                        ? `<span class="member-phone">
+                            ${member.phone}
+                           </span>`
                         : ""
                 }
 
@@ -166,10 +344,24 @@ function displayMembers(members) {
         `;
 
 
+        const checkbox =
+            row.querySelector(
+                ".member-checkbox"
+            );
+
+
+        checkbox.addEventListener(
+            "change",
+            updateAttendanceCounts
+        );
+
+
         attendanceList.appendChild(row);
 
     });
 
+
+    updateAttendanceCounts();
 }
 
 
@@ -182,8 +374,19 @@ async function loadExistingAttendance() {
     const selectedDate =
         attendanceDate.value;
 
-
     if (!selectedDate) {
+
+        return;
+    }
+
+    if (!isSunday(selectedDate)) {
+
+        existingAttendance = [];
+
+        displayMembers(
+            getFilteredMembers()
+        );
+
         return;
     }
 
@@ -191,7 +394,9 @@ async function loadExistingAttendance() {
     const { data, error } =
         await supabaseClient
             .from("attendance")
-            .select("member_id, present")
+            .select(
+                "member_id, present"
+            )
             .eq(
                 "attendance_date",
                 selectedDate
@@ -200,7 +405,10 @@ async function loadExistingAttendance() {
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            "Attendance loading error:",
+            error
+        );
 
         return;
     }
@@ -213,7 +421,6 @@ async function loadExistingAttendance() {
     displayMembers(
         getFilteredMembers()
     );
-
 }
 
 
@@ -236,24 +443,26 @@ function getFilteredMembers() {
     }
 
 
-    return allMembers.filter(member => {
+    return allMembers.filter(
+        member => {
 
-        const name =
-            (member.name || "")
-                .toLowerCase();
-
-        const phone =
-            (member.phone || "")
-                .toLowerCase();
+            const name =
+                (member.name || "")
+                    .toLowerCase();
 
 
-        return (
-            name.includes(searchText) ||
-            phone.includes(searchText)
-        );
+            const phone =
+                (member.phone || "")
+                    .toLowerCase();
 
-    });
 
+            return (
+                name.includes(searchText) ||
+                phone.includes(searchText)
+            );
+
+        }
+    );
 }
 
 
@@ -279,6 +488,25 @@ attendanceDate.addEventListener(
 
         message.textContent = "";
 
+
+        if (!isSunday(
+            attendanceDate.value
+        )) {
+
+            alert(
+                "Please select a Sunday only."
+            );
+
+
+            setSundayDate();
+
+            return;
+        }
+
+
+        updateSelectedDay();
+
+
         await loadExistingAttendance();
 
     }
@@ -286,7 +514,7 @@ attendanceDate.addEventListener(
 
 
 // ===============================
-// SAVE ATTENDANCE
+// SAVE SUNDAY ATTENDANCE
 // ===============================
 
 saveAttendanceBtn.addEventListener(
@@ -300,63 +528,96 @@ saveAttendanceBtn.addEventListener(
         if (!selectedDate) {
 
             alert(
-                "Please select a date."
+                "Please select a Sunday."
             );
 
             return;
         }
 
 
-        // Get ALL member checkboxes
-        // from all members, not just
-        // currently searched members.
+        if (!isSunday(selectedDate)) {
 
-        const allCheckboxes =
-            document.querySelectorAll(
-                ".member-checkbox"
+            alert(
+                "Attendance can only be marked for Sundays."
             );
 
-
-        // Create records based on
-        // currently displayed members.
-
-        const attendanceRecords = [];
+            return;
+        }
 
 
-        allCheckboxes.forEach(
-            checkbox => {
+        if (allMembers.length === 0) {
 
-                attendanceRecords.push({
+            alert(
+                "No active members found."
+            );
+
+            return;
+        }
+
+
+        // Create attendance records
+        // for every active member.
+
+        const attendanceRecords =
+            allMembers.map(member => {
+
+
+                const checkbox =
+                    document.querySelector(
+                        `.member-checkbox[data-member-id="${member.id}"]`
+                    );
+
+
+                const existingRecord =
+                    existingAttendance.find(
+                        record =>
+                            String(
+                                record.member_id
+                            ) ===
+                            String(member.id)
+                    );
+
+
+                let present =
+                    existingRecord
+                        ? existingRecord.present
+                        : false;
+
+
+                if (checkbox) {
+
+                    present =
+                        checkbox.checked;
+
+                }
+
+
+                return {
 
                     member_id:
-                        checkbox.dataset.memberId,
+                        member.id,
 
                     attendance_date:
                         selectedDate,
 
                     present:
-                        checkbox.checked
+                        present
 
-                });
+                };
 
-            }
-        );
+            });
 
 
-        if (
-            attendanceRecords.length === 0
-        ) {
+        saveAttendanceBtn.disabled =
+            true;
 
-            alert(
-                "No members found."
-            );
 
-            return;
-        }
+        saveAttendanceBtn.textContent =
+            "⏳ SAVING...";
 
 
         // ===============================
-        // DELETE OLD RECORDS FOR DATE
+        // DELETE OLD RECORDS
         // ===============================
 
         const { error: deleteError } =
@@ -375,10 +636,20 @@ saveAttendanceBtn.addEventListener(
                 deleteError
             );
 
+
             alert(
                 "Error updating attendance: " +
                 deleteError.message
             );
+
+
+            saveAttendanceBtn.disabled =
+                false;
+
+
+            saveAttendanceBtn.textContent =
+                "💾 SAVE SUNDAY ATTENDANCE";
+
 
             return;
         }
@@ -402,20 +673,43 @@ saveAttendanceBtn.addEventListener(
                 insertError
             );
 
+
             alert(
                 "Error saving attendance: " +
                 insertError.message
             );
 
+
+            saveAttendanceBtn.disabled =
+                false;
+
+
+            saveAttendanceBtn.textContent =
+                "💾 SAVE SUNDAY ATTENDANCE";
+
+
             return;
         }
 
 
+        // ===============================
+        // SUCCESS
+        // ===============================
+
         message.style.color =
-            "green";
+            "#16a34a";
+
 
         message.textContent =
-            "Attendance saved successfully!";
+            "✅ Sunday attendance saved successfully!";
+
+
+        saveAttendanceBtn.disabled =
+            false;
+
+
+        saveAttendanceBtn.textContent =
+            "💾 SAVE SUNDAY ATTENDANCE";
 
 
         await loadExistingAttendance();
@@ -425,7 +719,7 @@ saveAttendanceBtn.addEventListener(
 
 
 // ===============================
-// BACK TO DASHBOARD
+// DASHBOARD BUTTON
 // ===============================
 
 document
@@ -454,11 +748,14 @@ async function startPage() {
     if (!loggedIn) {
 
         return;
-
     }
 
 
+    setSundayDate();
+
+
     await loadMembers();
+
 
     await loadExistingAttendance();
 

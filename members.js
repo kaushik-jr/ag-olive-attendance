@@ -1,14 +1,15 @@
 const SUPABASE_URL =
-"https://hrnblzhstapfkonavpye.supabase.co";
+    "https://hrnblzhstapfkonavpye.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_9MAdAwW84eAxyCMSaANZBw_qDEoWhVw";
+    "sb_publishable_9MAdAwW84eAxyCMSaANZBw_qDEoWhVw";
 
 const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
 
 // =====================================
 // CHECK LOGIN
@@ -16,22 +17,19 @@ SUPABASE_KEY
 
 async function checkUser() {
 
-```
-const { data, error } =
-    await supabaseClient.auth.getSession();
+    const { data, error } =
+        await supabaseClient.auth.getSession();
 
-if (error || !data.session) {
+    if (error || !data.session) {
 
-    window.location.href =
-        "index.html";
+        window.location.href = "index.html";
 
-    return false;
+        return false;
+    }
+
+    return true;
 }
 
-return true;
-```
-
-}
 
 // =====================================
 // VARIABLES
@@ -41,33 +39,38 @@ let allMembers = [];
 
 let editingMemberId = null;
 
+
 // =====================================
 // ELEMENTS
 // =====================================
 
 const membersList =
-document.getElementById("membersList");
+    document.getElementById("membersList");
 
 const searchMember =
-document.getElementById("searchMember");
+    document.getElementById("searchMember");
 
 const addMemberBtn =
-document.getElementById("addMemberBtn");
+    document.getElementById("addMemberBtn");
 
 const memberForm =
-document.getElementById("memberForm");
+    document.getElementById("memberForm");
 
 const cancelBtn =
-document.getElementById("cancelBtn");
+    document.getElementById("cancelBtn");
 
 const formTitle =
-document.getElementById("formTitle");
+    document.getElementById("formTitle");
 
 const saveBtn =
-document.getElementById("saveBtn");
+    document.getElementById("saveBtn");
 
 const newMemberForm =
-document.getElementById("newMemberForm");
+    document.getElementById("newMemberForm");
+
+const backBtn =
+    document.getElementById("backBtn");
+
 
 // =====================================
 // LOAD MEMBERS
@@ -75,52 +78,42 @@ document.getElementById("newMemberForm");
 
 async function loadMembers() {
 
-```
-membersList.innerHTML = `
-    <div class="loading-state">
-        ⏳ Loading members...
-    </div>
-`;
+    membersList.innerHTML =
+        "Loading members...";
 
 
-const { data, error } =
-    await supabaseClient
-        .from("members")
-        .select("*")
-        .order("name", {
-            ascending: true
-        });
+    const { data, error } =
+        await supabaseClient
+            .from("members")
+            .select("*")
+            .order("name", {
+                ascending: true
+            });
 
 
-if (error) {
+    if (error) {
 
-    console.error(
-        "Member loading error:",
-        error
-    );
+        console.error(
+            "Member loading error:",
+            error
+        );
 
-    membersList.innerHTML = `
-        <div class="empty-state">
-            ❌
-            <p>
-                Error loading members.
-            </p>
-        </div>
-    `;
+        membersList.innerHTML =
+            "Error loading members: " +
+            error.message;
 
-    return;
+        return;
+    }
+
+
+    allMembers = data || [];
+
+
+    updateStatistics();
+
+    displayMembers(allMembers);
 }
 
-
-allMembers = data || [];
-
-
-updateStatistics();
-
-displayMembers(allMembers);
-```
-
-}
 
 // =====================================
 // UPDATE STATISTICS
@@ -128,39 +121,50 @@ displayMembers(allMembers);
 
 function updateStatistics() {
 
-```
-const total =
-    allMembers.length;
+    const totalMembers =
+        document.getElementById(
+            "totalMembers"
+        );
+
+    const activeMembers =
+        document.getElementById(
+            "activeMembers"
+        );
+
+    const inactiveMembers =
+        document.getElementById(
+            "inactiveMembers"
+        );
 
 
-const active =
-    allMembers.filter(
-        member => member.active === true
-    ).length;
+    const total =
+        allMembers.length;
 
 
-const inactive =
-    allMembers.filter(
-        member => member.active === false
-    ).length;
+    const active =
+        allMembers.filter(
+            member => member.active === true
+        ).length;
 
 
-document.getElementById(
-    "totalMembers"
-).textContent = total;
+    const inactive =
+        allMembers.filter(
+            member => member.active !== true
+        ).length;
 
 
-document.getElementById(
-    "activeMembers"
-).textContent = active;
+    totalMembers.textContent =
+        total;
 
 
-document.getElementById(
-    "inactiveMembers"
-).textContent = inactive;
-```
+    activeMembers.textContent =
+        active;
 
+
+    inactiveMembers.textContent =
+        inactive;
 }
+
 
 // =====================================
 // DISPLAY MEMBERS
@@ -168,120 +172,105 @@ document.getElementById(
 
 function displayMembers(members) {
 
-```
-membersList.innerHTML = "";
+    if (!members || members.length === 0) {
 
+        membersList.innerHTML = `
 
-if (!members ||
-    members.length === 0) {
+            <div class="empty-state">
 
-    membersList.innerHTML = `
-
-        <div class="empty-state">
-
-            <div>
-                👥
-            </div>
-
-            <h3>
-                No Members Found
-            </h3>
-
-            <p>
-                Try another search or add a new member.
-            </p>
-
-        </div>
-
-    `;
-
-    return;
-}
-
-
-members.forEach(member => {
-
-    const memberDiv =
-        document.createElement("div");
-
-
-    memberDiv.className =
-        "member-card";
-
-
-    const statusClass =
-        member.active
-            ? "active"
-            : "inactive";
-
-
-    const statusText =
-        member.active
-            ? "🟢 Active"
-            : "🔴 Inactive";
-
-
-    memberDiv.innerHTML = `
-
-        <div class="member-card-header">
-
-            <div class="member-avatar">
-                ${getInitials(member.name)}
-            </div>
-
-            <div class="member-name-area">
+                <div class="empty-icon">
+                    👥
+                </div>
 
                 <h3>
-                    ${escapeHTML(member.name)}
+                    No Members Found
                 </h3>
 
-                <span class="status-badge ${statusClass}">
-                    ${statusText}
-                </span>
+                <p>
+                    Add a church member to get started.
+                </p>
 
             </div>
 
-        </div>
+        `;
+
+        return;
+    }
 
 
-        <div class="member-details">
+    membersList.innerHTML = "";
 
 
-            <div class="member-detail">
+    members.forEach(member => {
 
-                <span>
-                    📱
-                </span>
+        const memberDiv =
+            document.createElement("div");
 
-                <div>
 
-                    <small>
-                        Phone
-                    </small>
+        memberDiv.className =
+            "member-card";
 
-                    <strong>
-                        ${escapeHTML(
-                            member.phone ||
-                            "Not provided"
-                        )}
-                    </strong>
+
+        const statusText =
+            member.active
+                ? "Active"
+                : "Inactive";
+
+
+        const statusClass =
+            member.active
+                ? "active"
+                : "inactive";
+
+
+        memberDiv.innerHTML = `
+
+            <div class="member-card-header">
+
+                <div class="member-avatar">
+                    ${getInitials(member.name)}
+                </div>
+
+                <div class="member-main-info">
+
+                    <h3>
+                        ${escapeHTML(member.name)}
+                    </h3>
+
+                    <span class="member-status ${statusClass}">
+                        ${member.active ? "🟢" : "🔴"}
+                        ${statusText}
+                    </span>
 
                 </div>
 
             </div>
 
 
-            <div class="member-detail">
+            <div class="member-details">
 
-                <span>
-                    🎂
-                </span>
+                <div class="member-detail">
 
-                <div>
+                    <span>
+                        📱 Phone
+                    </span>
 
-                    <small>
-                        Age
-                    </small>
+                    <strong>
+                        ${
+                            member.phone
+                                ? escapeHTML(member.phone)
+                                : "Not provided"
+                        }
+                    </strong>
+
+                </div>
+
+
+                <div class="member-detail">
+
+                    <span>
+                        🎂 Age
+                    </span>
 
                     <strong>
                         ${
@@ -292,44 +281,29 @@ members.forEach(member => {
 
                 </div>
 
-            </div>
 
+                <div class="member-detail">
 
-            <div class="member-detail">
-
-                <span>
-                    ⚥
-                </span>
-
-                <div>
-
-                    <small>
-                        Gender
-                    </small>
+                    <span>
+                        ⚥ Gender
+                    </span>
 
                     <strong>
-                        ${escapeHTML(
-                            member.gender ||
-                            "Not provided"
-                        )}
+                        ${
+                            member.gender
+                                ? escapeHTML(member.gender)
+                                : "Not provided"
+                        }
                     </strong>
 
                 </div>
 
-            </div>
 
+                <div class="member-detail">
 
-            <div class="member-detail">
-
-                <span>
-                    📅
-                </span>
-
-                <div>
-
-                    <small>
-                        Joined
-                    </small>
+                    <span>
+                        📅 Joined
+                    </span>
 
                     <strong>
                         ${
@@ -343,83 +317,72 @@ members.forEach(member => {
             </div>
 
 
-        </div>
+            <div class="member-actions">
+
+                <button
+                    class="edit-member-btn"
+                    data-id="${member.id}"
+                >
+                    ✏️ Edit
+                </button>
 
 
-        <div class="member-actions">
+                <button
+                    class="toggle-active-btn"
+                    data-id="${member.id}"
+                >
+
+                    ${
+                        member.active
+                            ? "🔴 Deactivate"
+                            : "🟢 Activate"
+                    }
+
+                </button>
+
+            </div>
+
+        `;
 
 
-            <button
-                class="edit-member-btn"
-                data-id="${member.id}"
-            >
-                ✏️ Edit
-            </button>
+        membersList.appendChild(memberDiv);
+
+    });
 
 
-            <button
-                class="toggle-active-btn"
-                data-id="${member.id}"
-            >
-
-                ${
-                    member.active
-                        ? "🔴 Deactivate"
-                        : "🟢 Activate"
-                }
-
-            </button>
-
-
-        </div>
-
-    `;
-
-
-    membersList.appendChild(memberDiv);
-
-});
-
-
-attachMemberButtons();
-```
-
+    attachMemberButtons();
 }
 
+
 // =====================================
-// MEMBER INITIALS
+// GET INITIALS
 // =====================================
 
 function getInitials(name) {
 
-```
-if (!name) {
+    if (!name) {
+        return "👤";
+    }
 
-    return "?";
+
+    const words =
+        name.trim().split(" ");
+
+
+    if (words.length === 1) {
+
+        return words[0]
+            .substring(0, 2)
+            .toUpperCase();
+    }
+
+
+    return (
+        words[0][0] +
+        words[words.length - 1][0]
+    ).toUpperCase();
 }
 
-
-const words =
-    name
-        .trim()
-        .split(/\s+/);
-
-
-if (words.length === 1) {
-
-    return words[0]
-        .substring(0, 2)
-        .toUpperCase();
-}
-
-
-return (
-    words[0][0] +
-    words[words.length - 1][0]
-).toUpperCase();
-```
-
-}
 
 // =====================================
 // ESCAPE HTML
@@ -427,17 +390,14 @@ return (
 
 function escapeHTML(value) {
 
-```
-const div =
-    document.createElement("div");
-
-div.textContent =
-    value;
-
-return div.innerHTML;
-```
-
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
+
 
 // =====================================
 // BUTTON EVENTS
@@ -445,146 +405,134 @@ return div.innerHTML;
 
 function attachMemberButtons() {
 
-```
-document
-    .querySelectorAll(".edit-member-btn")
-    .forEach(button => {
 
-        button.addEventListener(
-            "click",
-            function () {
+    // EDIT
 
-                editMember(
-                    this.dataset.id
-                );
+    document
+        .querySelectorAll(".edit-member-btn")
+        .forEach(button => {
 
-            }
-        );
+            button.addEventListener(
+                "click",
+                function () {
 
-    });
+                    editMember(
+                        this.dataset.id
+                    );
+
+                }
+            );
+
+        });
 
 
-document
-    .querySelectorAll(".toggle-active-btn")
-    .forEach(button => {
+    // ACTIVATE / DEACTIVATE
 
-        button.addEventListener(
-            "click",
-            async function () {
+    document
+        .querySelectorAll(".toggle-active-btn")
+        .forEach(button => {
 
-                await toggleMemberStatus(
-                    this.dataset.id
-                );
+            button.addEventListener(
+                "click",
+                async function () {
 
-            }
-        );
+                    const memberId =
+                        this.dataset.id;
 
-    });
-```
+
+                    const member =
+                        allMembers.find(
+                            m =>
+                                String(m.id) ===
+                                String(memberId)
+                        );
+
+
+                    if (!member) {
+                        return;
+                    }
+
+
+                    const newStatus =
+                        !member.active;
+
+
+                    const action =
+                        newStatus
+                            ? "activate"
+                            : "deactivate";
+
+
+                    const confirmed =
+                        confirm(
+                            `Are you sure you want to ${action} ${member.name}?`
+                        );
+
+
+                    if (!confirmed) {
+                        return;
+                    }
+
+
+                    const { error } =
+                        await supabaseClient
+                            .from("members")
+                            .update({
+                                active: newStatus
+                            })
+                            .eq(
+                                "id",
+                                memberId
+                            );
+
+
+                    if (error) {
+
+                        console.error(error);
+
+                        alert(
+                            "Error changing member status: " +
+                            error.message
+                        );
+
+                        return;
+                    }
+
+
+                    await loadMembers();
+
+                }
+            );
+
+        });
 
 }
+
 
 // =====================================
-// ACTIVATE / DEACTIVATE
-// =====================================
-
-async function toggleMemberStatus(memberId) {
-
-```
-const member =
-    allMembers.find(
-        m =>
-            String(m.id) ===
-            String(memberId)
-    );
-
-
-if (!member) {
-
-    return;
-}
-
-
-const newStatus =
-    !member.active;
-
-
-const action =
-    newStatus
-        ? "activate"
-        : "deactivate";
-
-
-const confirmed =
-    confirm(
-        `Are you sure you want to ${action} ${member.name}?`
-    );
-
-
-if (!confirmed) {
-
-    return;
-}
-
-
-const { error } =
-    await supabaseClient
-        .from("members")
-        .update({
-            active: newStatus
-        })
-        .eq(
-            "id",
-            memberId
-        );
-
-
-if (error) {
-
-    console.error(error);
-
-    alert(
-        "Error changing member status: " +
-        error.message
-    );
-
-    return;
-}
-
-
-await loadMembers();
-```
-
-}
-
-// =====================================
-// SEARCH MEMBERS
+// SEARCH
 // =====================================
 
 searchMember.addEventListener(
-"input",
-function () {
+    "input",
+    function () {
 
-```
-    const searchText =
-        this.value
-            .toLowerCase()
-            .trim();
-
-
-    if (searchText === "") {
-
-        displayMembers(
-            allMembers
-        );
-
-        return;
-    }
+        const searchText =
+            this.value
+                .toLowerCase()
+                .trim();
 
 
-    const filteredMembers =
-        allMembers.filter(
-            member => {
+        if (searchText === "") {
+
+            displayMembers(allMembers);
+
+            return;
+        }
+
+
+        const filteredMembers =
+            allMembers.filter(member => {
 
                 const name =
                     String(
@@ -599,48 +547,141 @@ function () {
 
 
                 return (
-                    name.includes(
-                        searchText
-                    ) ||
-                    phone.includes(
-                        searchText
-                    )
+                    name.includes(searchText) ||
+                    phone.includes(searchText)
                 );
 
-            }
+            });
+
+
+        displayMembers(
+            filteredMembers
         );
 
-
-    displayMembers(
-        filteredMembers
-    );
-
-}
-```
-
+    }
 );
+
 
 // =====================================
 // ADD MEMBER
 // =====================================
 
 addMemberBtn.addEventListener(
-"click",
-function () {
+    "click",
+    function () {
 
-```
-    editingMemberId = null;
+        editingMemberId = null;
+
+
+        formTitle.textContent =
+            "➕ Add New Member";
+
+
+        saveBtn.textContent =
+            "💾 SAVE MEMBER";
+
+
+        newMemberForm.reset();
+
+
+        memberForm.style.display =
+            "block";
+
+
+        memberForm.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+);
+
+
+// =====================================
+// CANCEL
+// =====================================
+
+cancelBtn.addEventListener(
+    "click",
+    function () {
+
+        memberForm.style.display =
+            "none";
+
+
+        newMemberForm.reset();
+
+
+        editingMemberId = null;
+
+
+        formTitle.textContent =
+            "➕ Add New Member";
+
+
+        saveBtn.textContent =
+            "💾 SAVE MEMBER";
+
+    }
+);
+
+
+// =====================================
+// EDIT MEMBER
+// =====================================
+
+async function editMember(memberId) {
+
+    const { data, error } =
+        await supabaseClient
+            .from("members")
+            .select("*")
+            .eq("id", memberId)
+            .single();
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Error loading member: " +
+            error.message
+        );
+
+        return;
+    }
+
+
+    editingMemberId =
+        memberId;
+
+
+    document.getElementById("name").value =
+        data.name || "";
+
+
+    document.getElementById("phone").value =
+        data.phone || "";
+
+
+    document.getElementById("age").value =
+        data.age ?? "";
+
+
+    document.getElementById("gender").value =
+        data.gender || "";
+
+
+    document.getElementById("joined_date").value =
+        data.joined_date || "";
 
 
     formTitle.textContent =
-        "➕ Add New Member";
+        "✏️ Edit Member";
 
 
     saveBtn.textContent =
-        "💾 SAVE MEMBER";
-
-
-    newMemberForm.reset();
+        "💾 SAVE CHANGES";
 
 
     memberForm.style.display =
@@ -652,339 +693,218 @@ function () {
     });
 
 }
-```
 
-);
 
 // =====================================
-// CANCEL FORM
-// =====================================
-
-cancelBtn.addEventListener(
-"click",
-function () {
-
-```
-    closeForm();
-
-}
-```
-
-);
-
-// =====================================
-// CLOSE FORM
-// =====================================
-
-function closeForm() {
-
-```
-memberForm.style.display =
-    "none";
-
-
-newMemberForm.reset();
-
-
-editingMemberId = null;
-
-
-formTitle.textContent =
-    "➕ Add New Member";
-
-
-saveBtn.textContent =
-    "💾 SAVE MEMBER";
-```
-
-}
-
-// =====================================
-// EDIT MEMBER
-// =====================================
-
-async function editMember(memberId) {
-
-```
-const { data, error } =
-    await supabaseClient
-        .from("members")
-        .select("*")
-        .eq(
-            "id",
-            memberId
-        )
-        .single();
-
-
-if (error) {
-
-    console.error(error);
-
-    alert(
-        "Error loading member: " +
-        error.message
-    );
-
-    return;
-}
-
-
-editingMemberId =
-    memberId;
-
-
-document.getElementById("name").value =
-    data.name || "";
-
-
-document.getElementById("phone").value =
-    data.phone || "";
-
-
-document.getElementById("age").value =
-    data.age ?? "";
-
-
-document.getElementById("gender").value =
-    data.gender || "";
-
-
-document.getElementById("joined_date").value =
-    data.joined_date || "";
-
-
-formTitle.textContent =
-    "✏️ Edit Member";
-
-
-saveBtn.textContent =
-    "💾 SAVE CHANGES";
-
-
-memberForm.style.display =
-    "block";
-
-
-memberForm.scrollIntoView({
-    behavior: "smooth"
-});
-```
-
-}
-
-// =====================================
-// SAVE / UPDATE MEMBER
+// SAVE MEMBER
 // =====================================
 
 newMemberForm.addEventListener(
-"submit",
-async function (event) {
+    "submit",
+    async function (event) {
 
-```
-    event.preventDefault();
-
-
-    const name =
-        document.getElementById(
-            "name"
-        ).value.trim();
+        event.preventDefault();
 
 
-    const phone =
-        document.getElementById(
-            "phone"
-        ).value.trim();
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
 
 
-    const age =
-        document.getElementById(
-            "age"
-        ).value;
+        const phone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
 
 
-    const gender =
-        document.getElementById(
-            "gender"
-        ).value;
+        const age =
+            document
+                .getElementById("age")
+                .value;
 
 
-    const joined_date =
-        document.getElementById(
-            "joined_date"
-        ).value;
+        const gender =
+            document
+                .getElementById("gender")
+                .value;
 
 
-    if (!name) {
-
-        alert(
-            "Please enter the member name."
-        );
-
-        return;
-    }
+        const joined_date =
+            document
+                .getElementById("joined_date")
+                .value;
 
 
-    saveBtn.disabled = true;
-
-
-    saveBtn.textContent =
-        "⏳ SAVING...";
-
-
-    // =================================
-    // UPDATE
-    // =================================
-
-    if (editingMemberId !== null) {
-
-        const { error } =
-            await supabaseClient
-                .from("members")
-                .update({
-
-                    name: name,
-
-                    phone:
-                        phone || null,
-
-                    age:
-                        age
-                            ? Number(age)
-                            : null,
-
-                    gender:
-                        gender || null,
-
-                    joined_date:
-                        joined_date || null
-
-                })
-                .eq(
-                    "id",
-                    editingMemberId
-                );
-
-
-        if (error) {
-
-            console.error(error);
+        if (!name) {
 
             alert(
-                "Error updating member: " +
-                error.message
+                "Please enter the member name."
             );
-
-            saveBtn.disabled = false;
-
-            saveBtn.textContent =
-                "💾 SAVE CHANGES";
 
             return;
         }
 
 
-        alert(
-            "✅ Member updated successfully!"
-        );
+        saveBtn.disabled = true;
 
 
-        saveBtn.disabled = false;
+        saveBtn.textContent =
+            "⏳ SAVING...";
 
 
-        closeForm();
+        // =================================
+        // UPDATE
+        // =================================
+
+        if (editingMemberId !== null) {
+
+            const { error } =
+                await supabaseClient
+                    .from("members")
+                    .update({
+
+                        name: name,
+
+                        phone:
+                            phone || null,
+
+                        age:
+                            age
+                                ? Number(age)
+                                : null,
+
+                        gender:
+                            gender || null,
+
+                        joined_date:
+                            joined_date || null
+
+                    })
+                    .eq(
+                        "id",
+                        editingMemberId
+                    );
 
 
-        await loadMembers();
+            if (error) {
+
+                console.error(error);
+
+                alert(
+                    "Error updating member: " +
+                    error.message
+                );
+
+                saveBtn.disabled = false;
+
+                saveBtn.textContent =
+                    "💾 SAVE CHANGES";
+
+                return;
+            }
 
 
-        return;
-    }
+            alert(
+                "Member updated successfully!"
+            );
+
+        }
 
 
-    // =================================
-    // ADD
-    // =================================
+        // =================================
+        // ADD
+        // =================================
 
-    const { error } =
-        await supabaseClient
-            .from("members")
-            .insert({
+        else {
 
-                name: name,
+            const { error } =
+                await supabaseClient
+                    .from("members")
+                    .insert({
 
-                phone:
-                    phone || null,
+                        name: name,
 
-                age:
-                    age
-                        ? Number(age)
-                        : null,
+                        phone:
+                            phone || null,
 
-                gender:
-                    gender || null,
+                        age:
+                            age
+                                ? Number(age)
+                                : null,
 
-                joined_date:
-                    joined_date || null,
+                        gender:
+                            gender || null,
 
-                active: true
+                        joined_date:
+                            joined_date || null,
 
-            });
+                        active: true
+
+                    });
 
 
-    if (error) {
+            if (error) {
 
-        console.error(error);
+                console.error(error);
 
-        alert(
-            "Error adding member: " +
-            error.message
-        );
+                alert(
+                    "Error adding member: " +
+                    error.message
+                );
+
+                saveBtn.disabled = false;
+
+                saveBtn.textContent =
+                    "💾 SAVE MEMBER";
+
+                return;
+            }
+
+
+            alert(
+                "Member added successfully!"
+            );
+
+        }
+
+
+        editingMemberId = null;
+
+        newMemberForm.reset();
+
+        memberForm.style.display =
+            "none";
+
 
         saveBtn.disabled = false;
 
         saveBtn.textContent =
             "💾 SAVE MEMBER";
 
-        return;
+
+        await loadMembers();
+
     }
-
-
-    alert(
-        "✅ Member added successfully!"
-    );
-
-
-    saveBtn.disabled = false;
-
-
-    closeForm();
-
-
-    await loadMembers();
-
-}
-```
-
 );
+
 
 // =====================================
 // DASHBOARD
 // =====================================
 
-document
-.getElementById("backBtn")
-.addEventListener(
-"click",
-function () {
+backBtn.addEventListener(
+    "click",
+    function () {
 
-```
         window.location.href =
             "dashboard.html";
 
     }
 );
-```
+
 
 // =====================================
 // START PAGE
@@ -992,20 +912,18 @@ function () {
 
 async function startPage() {
 
-```
-const loggedIn =
-    await checkUser();
+    const loggedIn =
+        await checkUser();
 
 
-if (!loggedIn) {
+    if (!loggedIn) {
+        return;
+    }
 
-    return;
-}
 
-
-await loadMembers();
-```
+    await loadMembers();
 
 }
+
 
 startPage();

@@ -1,403 +1,343 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AG Olive Prayer Centre - Members</title>
 
-<title>AG Olive Prayer Centre - Members</title>
-
-<link rel="stylesheet" href="style.css">
-```
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-```
-<div class="dashboard">
+    <div class="dashboard">
 
+        <!-- =========================
+             HEADER
+        ========================== -->
 
-    <!-- =========================
-         HEADER
-    ========================== -->
-
-    <header class="dashboard-header">
-
-        <div>
-
-            <h1>
-                AG Olive Prayer Centre
-            </h1>
-
-            <p>
-                Attendance System
-            </p>
-
-        </div>
-
-
-        <button id="backBtn">
-            🏠 DASHBOARD
-        </button>
-
-    </header>
-
-
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
-    <main class="dashboard-content">
-
-
-        <div class="page-heading">
+        <header class="dashboard-header">
 
             <div>
+                <h1>AG Olive Prayer Centre</h1>
 
-                <h2>
-                    👥 Members
-                </h2>
-
-                <p>
-                    Manage church members
-                </p>
-
+                <p>Attendance System</p>
             </div>
 
-
-            <button
-                id="addMemberBtn"
-                class="primary-btn"
-            >
-                ➕ Add Member
+            <button id="backBtn">
+                🏠 DASHBOARD
             </button>
 
-        </div>
-
-
-
-        <!-- =========================
-             MEMBER STATISTICS
-        ========================== -->
-
-        <div class="cards">
-
-
-            <div class="card stat-card">
-
-                <div class="stat-icon">
-                    👥
-                </div>
-
-                <div>
-
-                    <h3>
-                        Total Members
-                    </h3>
-
-                    <p id="totalMembers">
-                        0
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="card stat-card">
-
-                <div class="stat-icon">
-                    🟢
-                </div>
-
-                <div>
-
-                    <h3>
-                        Active
-                    </h3>
-
-                    <p id="activeMembers">
-                        0
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="card stat-card">
-
-                <div class="stat-icon">
-                    🔴
-                </div>
-
-                <div>
-
-                    <h3>
-                        Inactive
-                    </h3>
-
-                    <p id="inactiveMembers">
-                        0
-                    </p>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
+        </header>
 
 
         <!-- =========================
-             ADD / EDIT FORM
+             MAIN CONTENT
         ========================== -->
 
-        <div
-            id="memberForm"
-            class="card form-card"
-            style="display: none;"
-        >
+        <main class="dashboard-content">
 
-            <div class="form-header">
+            <div class="page-heading">
 
                 <div>
+                    <h2>👥 Members</h2>
 
-                    <h3 id="formTitle">
-                        ➕ Add New Member
-                    </h3>
+                    <p>Manage church members</p>
+                </div>
 
-                    <p>
-                        Enter the member details below
-                    </p>
+                <button
+                    id="addMemberBtn"
+                    class="primary-btn"
+                >
+                    ➕ Add Member
+                </button>
+
+            </div>
+
+
+            <!-- =========================
+                 MEMBER STATISTICS
+            ========================== -->
+
+            <div class="cards">
+
+                <div class="card stat-card">
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                    <div>
+                        <h3>Total Members</h3>
+
+                        <p id="totalMembers">
+                            0
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card stat-card">
+
+                    <div class="stat-icon">
+                        🟢
+                    </div>
+
+                    <div>
+                        <h3>Active</h3>
+
+                        <p id="activeMembers">
+                            0
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="card stat-card">
+
+                    <div class="stat-icon">
+                        🔴
+                    </div>
+
+                    <div>
+                        <h3>Inactive</h3>
+
+                        <p id="inactiveMembers">
+                            0
+                        </p>
+                    </div>
 
                 </div>
 
             </div>
 
 
+            <!-- =========================
+                 ADD / EDIT FORM
+            ========================== -->
 
-            <form id="newMemberForm">
-
-
-                <div class="form-grid">
-
-
-                    <div class="form-group">
-
-                        <label for="name">
-                            👤 Full Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            placeholder="Enter full name"
-                            required
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="phone">
-                            📱 Phone Number
-                        </label>
-
-                        <input
-                            type="text"
-                            id="phone"
-                            placeholder="Enter phone number"
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="age">
-                            🎂 Age
-                        </label>
-
-                        <input
-                            type="number"
-                            id="age"
-                            placeholder="Enter age"
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="gender">
-                            ⚥ Gender
-                        </label>
-
-                        <select id="gender">
-
-                            <option value="">
-                                Select Gender
-                            </option>
-
-                            <option value="Male">
-                                Male
-                            </option>
-
-                            <option value="Female">
-                                Female
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="joined_date">
-                            📅 Joined Date
-                        </label>
-
-                        <input
-                            type="date"
-                            id="joined_date"
-                        >
-
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="form-actions">
-
-                    <button
-                        type="submit"
-                        id="saveBtn"
-                        class="primary-btn"
-                    >
-                        💾 SAVE MEMBER
-                    </button>
-
-
-                    <button
-                        type="button"
-                        id="cancelBtn"
-                        class="secondary-btn"
-                    >
-                        ✖ CANCEL
-                    </button>
-
-                </div>
-
-
-            </form>
-
-        </div>
-
-
-
-        <!-- =========================
-             SEARCH
-        ========================== -->
-
-        <div class="card search-card">
-
-            <div class="search-header">
-
-                <div>
-
-                    <h3>
-                        🔎 Search Members
-                    </h3>
-
-                    <p>
-                        Search by name or phone number
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <input
-                type="text"
-                id="searchMember"
-                placeholder="🔎 Type member name or phone..."
+            <div
+                id="memberForm"
+                class="card form-card"
+                style="display: none;"
             >
 
-        </div>
+                <div class="form-header">
+
+                    <div>
+
+                        <h3 id="formTitle">
+                            ➕ Add New Member
+                        </h3>
+
+                        <p>
+                            Enter the member details below
+                        </p>
+
+                    </div>
+
+                </div>
 
 
+                <form id="newMemberForm">
 
-        <!-- =========================
-             MEMBER LIST
-        ========================== -->
+                    <div class="form-grid">
 
-        <div class="members-section">
+                        <div class="form-group">
 
-            <div class="section-heading">
+                            <label for="name">
+                                👤 Full Name
+                            </label>
 
-                <div>
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter full name"
+                                required
+                            >
 
-                    <h3>
-                        👥 Member List
-                    </h3>
+                        </div>
 
-                    <p>
-                        All registered church members
-                    </p>
 
+                        <div class="form-group">
+
+                            <label for="phone">
+                                📱 Phone Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="phone"
+                                placeholder="Enter phone number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="age">
+                                🎂 Age
+                            </label>
+
+                            <input
+                                type="number"
+                                id="age"
+                                placeholder="Enter age"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="gender">
+                                ⚥ Gender
+                            </label>
+
+                            <select id="gender">
+
+                                <option value="">
+                                    Select Gender
+                                </option>
+
+                                <option value="Male">
+                                    Male
+                                </option>
+
+                                <option value="Female">
+                                    Female
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="joined_date">
+                                📅 Joined Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="joined_date"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            id="saveBtn"
+                            class="primary-btn"
+                        >
+                            💾 SAVE MEMBER
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="cancelBtn"
+                            class="secondary-btn"
+                        >
+                            ✖ CANCEL
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- =========================
+                 SEARCH
+            ========================== -->
+
+            <div class="card search-card">
+
+                <div class="search-header">
+
+                    <div>
+
+                        <h3>
+                            🔎 Search Members
+                        </h3>
+
+                        <p>
+                            Search by name or phone number
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="searchMember"
+                    placeholder="🔎 Type member name or phone..."
+                >
+
+            </div>
+
+
+            <!-- =========================
+                 MEMBER LIST
+            ========================== -->
+
+            <div class="members-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h3>
+                            👥 Member List
+                        </h3>
+
+                        <p>
+                            All registered church members
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="membersList">
+                    Loading members...
                 </div>
 
             </div>
 
+        </main>
 
-            <div id="membersList">
-
-                Loading members...
-
-            </div>
-
-        </div>
+    </div>
 
 
-    </main>
+    <!-- =========================
+         SUPABASE
+    ========================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-</div>
+    <!-- =========================
+         MEMBERS JAVASCRIPT
+    ========================== -->
 
-
-
-<!-- =========================
-     SUPABASE
-========================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-
-<!-- =========================
-     MEMBERS JAVASCRIPT
-========================== -->
-
-<script src="members.js"></script>
-```
+    <script src="members.js"></script>
 
 </body>
 
